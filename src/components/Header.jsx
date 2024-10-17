@@ -54,9 +54,9 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+    <div className="absolute w-screen px-8 py-2  from-black z-10 flex flex-col md:flex-row justify-between">
       <img
-        className="md:w-44 w-screen"
+        className="w-44 mx-auto md:mx-0"
         src="/Netflix_Logo_PMS.png"
         alt="Netflix Logo"
       />
@@ -113,7 +113,7 @@ const Header = () => {
           className="py-2 px-4 bg-red-700 hover:bg-red-800 rounded-full text-white font-semibold"
           onClick={handleSingInWithGoogle}
         >
-          Sign Up/In
+          Sign Up
         </button>
       )}
     </div>

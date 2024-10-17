@@ -11,3 +11,4 @@ export const API_OPTIONS = {
 
 export const API_KEY = 'c278715323ce0f78f6a9e7b1e7bd5bc4'
 export const NOW_PLAYING_URL = `https://api.themoviedb.org/3/movie/now_playing?&page=1&api_key=${API_KEY}`;
+export const IMG_CDN_URL = 'https://image.tmdb.org/t/p/w500'

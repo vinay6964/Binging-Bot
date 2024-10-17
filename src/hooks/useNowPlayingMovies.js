@@ -16,7 +16,6 @@ const useNowPlayingMovies = () => {
   useEffect(() => {
     getNowPlayingMovies();
   }, [getNowPlayingMovies]); // Add the memoized function to the dependency array
-
 };
 
 export default useNowPlayingMovies;
