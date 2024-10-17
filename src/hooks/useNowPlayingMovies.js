@@ -9,7 +9,7 @@ const useNowPlayingMovies = () => {
   const getNowPlayingMovies = async () => {
     const data = await fetch(NOW_PLAYING_URL, API_OPTIONS);
     const jsonData = await data.json();
-    dispatch(addNowPlayingMovies(jsonData));
+    dispatch(addNowPlayingMovies(jsonData.results));
   };
   useEffect(() => {
     getNowPlayingMovies();
