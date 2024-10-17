@@ -1,6 +1,5 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Header from "./Header";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LogIn from "./LogIn";
 import Browse from "./Browse";
 

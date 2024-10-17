@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { provider, auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addUserFromGoogle,
@@ -20,7 +20,7 @@ const Header = () => {
   useEffect(() => {
     if (signedInGoogleUser) navigate("/browse");
     else navigate("/");
-  },[signedInGoogleUser]);
+  },[signedInGoogleUser,navigate]);
 
   const handleSingInWithGoogle = () => {
     signInWithPopup(auth, provider)
