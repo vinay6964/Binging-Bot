@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../utils/languageConstants";
-import openai from "../utils/openAi";
+// import openai from "../utils/openAi";
 import { API_OPTIONS } from "../utils/constants";
 import { addMovieFromGpt } from "../utils/gptSlice";
 
