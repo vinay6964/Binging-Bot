@@ -8,6 +8,9 @@ import {
   removeUserFromGoogle,
 } from "../utils/signInWithGoogleSlice";
 import { useNavigate } from "react-router-dom";
+import { toggleGptSearch } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/languageConstants";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -16,11 +19,21 @@ const Header = () => {
   const signedInGoogleUser = useSelector((store) => {
     return store.userFromgoogle;
   });
+  const gptSearchData = useSelector((store) => store.gpt.showGptSearch)
+
+  const handlegptSearchClick = () => {
+    dispatch(toggleGptSearch());
+  };
+
+  const handleLanguageChange = (e) => {
+    console.log("🚀 ~ handleLanguageChange ~ e.target.value:", e.target.value)
+     dispatch(changeLanguage(e.target.value))
+  }
 
   useEffect(() => {
     if (signedInGoogleUser) navigate("/browse");
     else navigate("/");
-  },[signedInGoogleUser,navigate]);
+  }, [signedInGoogleUser, navigate]);
 
   const handleSingInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -54,63 +67,66 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen px-8 py-2  from-black z-10 flex flex-col md:flex-row justify-between">
+    <div className="absolute w-screen px-4 py-1 bg-gradient-to-r from-black-900 to-black-500 z-10 flex flex-col md:flex-row justify-between items-center">
       <img
-        className="w-44 mx-auto md:mx-0"
+        className="w-36 mx-auto md:mx-0"
         src="/Netflix_Logo_PMS.png"
         alt="Netflix Logo"
       />
+      
       {signedInGoogleUser ? (
-        <div className="relative">
-          <div
-            className="flex items-center cursor-pointer"
-            onClick={() => setShowDropdown(!showDropdown)}
+        <div className="flex items-center space-x-4">
+          {gptSearchData && (
+            <select 
+              onChange={handleLanguageChange} 
+              className="p-2 m-2 w-30 h-10 bg-gray-900 text-white border border-gray-700 rounded-md shadow-sm hover:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none transition ease-in-out duration-150"
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier} className="bg-gray-800 text-white">
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+  
+          <button
+            className="py-2 px-4 bg-purple-800 text-white rounded-lg hover:bg-purple-800 transition ease-in-out duration-150"
+            onClick={handlegptSearchClick}
           >
+            {gptSearchData ? "Home Page" : "GPT Search"}
+          </button>
+  
+          <div className="flex items-center cursor-pointer" onClick={() => setShowDropdown(!showDropdown)}>
             <img
               src={signedInGoogleUser?.photoURL}
               alt="User Avatar"
-              className="w-10 h-10 rounded-full"
+              className="w-8 h-8 rounded-full"
             />
-            <span className="ml-2 text-red-700 font-bold text-lg md:text-xl">
+            <span className="ml-2 text-red-600 font-semibold text-lg md:text-xl">
               {signedInGoogleUser.displayName
                 .split(" ")[0]
                 .charAt(0)
-                .toUpperCase() +
-                signedInGoogleUser.displayName
-                  .split(" ")[0]
-                  .slice(1)
-                  .toLowerCase()}
+                .toUpperCase() + signedInGoogleUser.displayName
+                .split(" ")[0]
+                .slice(1)
+                .toLowerCase()}
             </span>
           </div>
+  
           {showDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-black text-white shadow-lg rounded-lg">
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
-                Children
-              </div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
-                Manage Profiles
-              </div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
-                Transfer Profile
-              </div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
-                Account
-              </div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
-                Help Centre
-              </div>
-              <div
-                className="py-2 px-4 hover:bg-red-700 cursor-pointer"
-                onClick={handleSignOut}
-              >
-                Sign out of Netflix
-              </div>
+            <div className="absolute right-0 mt-2 w-40 bg-gray-900 text-white shadow-lg rounded-lg">
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Children</div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Manage Profiles</div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Transfer Profile</div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Account</div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Help Centre</div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer" onClick={handleSignOut}>Sign out of Netflix</div>
             </div>
           )}
         </div>
       ) : (
         <button
-          className="py-2 px-4 bg-red-700 hover:bg-red-800 rounded-full text-white font-semibold"
+          className="py-1 px-4 bg-red-600 hover:bg-red-700 rounded-full text-white font-semibold"
           onClick={handleSingInWithGoogle}
         >
           Sign Up
@@ -118,6 +134,8 @@ const Header = () => {
       )}
     </div>
   );
+  
+  
 };
 
 export default Header;
