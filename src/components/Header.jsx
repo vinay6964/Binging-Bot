@@ -19,16 +19,16 @@ const Header = () => {
   const signedInGoogleUser = useSelector((store) => {
     return store.userFromgoogle;
   });
-  const gptSearchData = useSelector((store) => store.gpt.showGptSearch)
+  const gptSearchData = useSelector((store) => store.gpt.showGptSearch);
 
   const handlegptSearchClick = () => {
     dispatch(toggleGptSearch());
   };
 
   const handleLanguageChange = (e) => {
-    console.log("🚀 ~ handleLanguageChange ~ e.target.value:", e.target.value)
-     dispatch(changeLanguage(e.target.value))
-  }
+    console.log("🚀 ~ handleLanguageChange ~ e.target.value:", e.target.value);
+    dispatch(changeLanguage(e.target.value));
+  };
 
   useEffect(() => {
     if (signedInGoogleUser) navigate("/browse");
@@ -73,30 +73,38 @@ const Header = () => {
         src="/Netflix_Logo_PMS.png"
         alt="Netflix Logo"
       />
-      
+
       {signedInGoogleUser ? (
         <div className="flex items-center space-x-4">
           {gptSearchData && (
-            <select 
-              onChange={handleLanguageChange} 
+            <select
+              onChange={handleLanguageChange}
               className="p-2 m-2 w-30 h-10 bg-gray-900 text-white border border-gray-700 rounded-md shadow-sm hover:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none transition ease-in-out duration-150"
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
-                <option key={lang.identifier} value={lang.identifier} className="bg-gray-800 text-white">
+                <option
+                  key={lang.identifier}
+                  value={lang.identifier}
+                  className="bg-gray-800 text-white"
+                >
                   {lang.name}
                 </option>
               ))}
             </select>
           )}
-  
-          <button
-            className="py-2 px-4 bg-purple-800 text-white rounded-lg hover:bg-purple-800 transition ease-in-out duration-150"
-            onClick={handlegptSearchClick}
+
+          <div className="justify-between flex p-2">
+            <button
+              className="py-2 px-3 bg-purple-800 text-white rounded-lg hover:bg-purple-800 transition ease-in-out duration-150"
+              onClick={handlegptSearchClick}
+            >
+              {gptSearchData ? "Home Page" : "GPT Search"}
+            </button>
+          </div>
+          <div
+            className="flex items-center justify-end px-10 -py-20 cursor-pointer"
+            onClick={() => setShowDropdown(!showDropdown)}
           >
-            {gptSearchData ? "Home Page" : "GPT Search"}
-          </button>
-  
-          <div className="flex items-center cursor-pointer" onClick={() => setShowDropdown(!showDropdown)}>
             <img
               src={signedInGoogleUser?.photoURL}
               alt="User Avatar"
@@ -106,21 +114,37 @@ const Header = () => {
               {signedInGoogleUser.displayName
                 .split(" ")[0]
                 .charAt(0)
-                .toUpperCase() + signedInGoogleUser.displayName
-                .split(" ")[0]
-                .slice(1)
-                .toLowerCase()}
+                .toUpperCase() +
+                signedInGoogleUser.displayName
+                  .split(" ")[0]
+                  .slice(1)
+                  .toLowerCase()}
             </span>
           </div>
-  
+
           {showDropdown && (
-            <div className="absolute right-0 mt-2 w-40 bg-gray-900 text-white shadow-lg rounded-lg">
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Children</div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Manage Profiles</div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Transfer Profile</div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Account</div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">Help Centre</div>
-              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer" onClick={handleSignOut}>Sign out of Netflix</div>
+            <div className="absolute right-30 top-20 mt-2 w-40 bg-gray-900 text-white shadow-lg rounded-lg">
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
+                Children
+              </div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
+                Manage Profiles
+              </div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
+                Transfer Profile
+              </div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
+                Account
+              </div>
+              <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
+                Help Centre
+              </div>
+              <div
+                className="py-2 px-4 hover:bg-red-700 cursor-pointer"
+                onClick={handleSignOut}
+              >
+                Sign out of Netflix
+              </div>
             </div>
           )}
         </div>
@@ -134,8 +158,6 @@ const Header = () => {
       )}
     </div>
   );
-  
-  
 };
 
 export default Header;

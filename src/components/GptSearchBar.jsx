@@ -30,7 +30,7 @@ const GptSearchBar = () => {
     //     model: "gpt-3.5-turbo",
     //   });
 
-    const gptMovies = "Andaz apna apna  , Angoor, Hera Pheri  ".split(",");
+    const gptMovies = "Andaz apna apna  , Angoor, Hera Pheri, Titanic  ".split(",");
     //   const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
       const gptTrimmedMovies = gptMovies.map((movie)=> movie.trim()); // later remove this line and uncomment line no 34
       const promiseDataArray = gptTrimmedMovies.map((movie) => searchMovieTmdb(movie))
@@ -49,9 +49,9 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="pt-[8%] flex justify-center">
+    <div className="pt-[40%] md:pt-[8%] flex justify-center">
       <form
-        className="w-1/2 bg-black grid grid-cols-12"
+        className="w-full md:w-1/2 bg-black grid grid-cols-12"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
@@ -61,7 +61,7 @@ const GptSearchBar = () => {
           placeholder={lang[confiData].getSearchPlaceHolder}
         />
         <button
-          className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg"
+          className="s:h-1/2 col-span-3 m-4 py-1 px-3 bg-red-700 text-white rounded-lg"
           onClick={handleGptSearch}
         >
           {lang[confiData].search}

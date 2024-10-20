@@ -43,9 +43,9 @@ const LogIn = () => {
         onSubmit={(e) => e.preventDefault()}
         className="w-full md:w-2/12 lg:w-4/12 absolute p-8 md:p-12 bg-black bg-opacity-80 top-1/2 transform -translate-y-1/2 mx-auto right-0 left-0 text-white rounded-lg"
       >
-        <h1 className="font-bold text-3xl py-4">
+        {/* <h1 className="font-bold text-3xl py-4 mx-10">
           {isSignInForm ? "Sign In" : "Sign Up"}
-        </h1>
+        </h1> */}
 
         {/* Username Input */}
         {!isSignInForm && (

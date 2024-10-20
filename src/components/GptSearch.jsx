@@ -5,13 +5,15 @@ import { LOGIN_IMG } from '../utils/constants'
 
 const GptSearch = () => {
   return (
-    <div>
+    <>
       <div className='fixed -z-10'>
-        <img src={LOGIN_IMG}  alt='logo' />
+        <img className="h-screen w-screen object-cover" src={LOGIN_IMG}  alt='logo' />
       </div>
+      <div className=''>
       <GptSearchBar />
       <GptMovieSuggestions/>
     </div>
+    </>
   )
 }
 
