@@ -126,7 +126,7 @@ const Header = () => {
         </div>
       ) : (
         <button
-          className="py-1 px-4 bg-red-600 hover:bg-red-700 rounded-full text-white font-semibold"
+          className="py-3 px-6 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold"
           onClick={handleSingInWithGoogle}
         >
           Sign Up
