@@ -1,6 +1,6 @@
 # Binging Bot
 
-Binging Bot is a Netflix clone with an intelligent movie suggestion system. It provides personalized movie recommendations based on your input. Just type what kind of movie you're looking for (e.g., "Indian retro comedy movies"), and Binging Bot will show relevant movie suggestions such as *Andaz Apna Apna* or *Hera Pheri*.
+Binging Bot is a Netflix clone with an intelligent movie suggestion system. It provides personalized movie recommendations based on your input. Just type what kind of movie you're looking for (e.g., "Indian retro comedy movies"), and Binging Bot will show relevant movie suggestions such as _Andaz Apna Apna_ or _Hera Pheri_.
 
 ## Features
 
@@ -15,8 +15,12 @@ Binging Bot is a Netflix clone with an intelligent movie suggestion system. It p
 
 ## Project Demo
 
-App is live at binging-bot.vercel.app/
-![Binging Bot Screenshot](./path-to-your-image)
+App is live at:  
+**[binging-bot.vercel.app](https://binging-bot.vercel.app/)**
+
+![Binging Bot Screenshot](./public/Screenshot1.png)
+![Binging Bot Screenshot](./public/Screenshot2.png)
+![Binging Bot Screenshot](./public/Screenshot3.png)
 
 ## How It Works
 
@@ -28,7 +32,7 @@ App is live at binging-bot.vercel.app/
 ## Tech Stack
 
 - **Frontend**: React.js
-- **API Integration**: 
+- **API Integration**:
   - OpenAI API for natural language processing and generating movie recommendations based on user input.
   - TMDB API for fetching movie data such as titles, posters, descriptions, etc.
 - **Authentication**: Firebase Authentication (Google OAuth)
@@ -42,17 +46,16 @@ App is live at binging-bot.vercel.app/
 Follow these steps to set up and run Binging Bot locally:
 
 1. **Clone the Repository**:
+
    ```bash
+   git clone https://github.com/vinay6964/Binging-Bot.git
+   cd Binging-Bot
+   npm install
+   REACT_APP_OPTIONS_KEY=<Your API Key>
+   REACT_APP_OPENAI_API_KEY=<Your OpenAI API Key>
+   REACT_APP_TMDB_API_KEY=<Your TMDB API Key>
+   npm start
+   ```
 
-  - git clone https://github.com/vinay6964/Binging-Bot.git
-  - install dependencies with npm install
-  - create .env file with 
-
-   RECAT_APP_OPTIONS_KEY = <Your api key>
-   REACT_APP_OPEN_AI_KEY = <YOUR API KEY>
-   REACT_APP_TMDB_API_KEY = <YOUR API KEY>
-
- - start the application with npm start
- - Access the app at http://localhost:3000
-   
-   
+Access the repo at
+http://localhost:3000
