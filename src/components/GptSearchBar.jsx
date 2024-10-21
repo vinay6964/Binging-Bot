@@ -22,7 +22,6 @@ const GptSearchBar = () => {
       serachText.current.value +
       ". inly give me names of 5 movies, comma seperated. Like the example result given ahead Example Result : Gadar, Sholay, The girl next door, bahubali";
 
-    console.log("🚀 ~ handleGptSearch ~ gptQuery:", gptQuery);
 
     try {
     //   const gptResults = await openai.chat.completions.create({

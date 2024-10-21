@@ -26,7 +26,7 @@ App is live at:
 
 1. **Search Functionality**: Users can input keywords or phrases like "action movies", "Hindi comedy films", or "retro Bollywood hits", and the app will provide movie suggestions based on their input.
 2. **Movie Data Fetching**: Using the TMDB API, Binging Bot fetches movie details, posters, and other relevant information to display to users.
-3. **Authentication**: Users can sign in using their Google account via Firebase Authentication. For those who prefer not to sign in, there's an option for guest login.
+3. **Authentication**: Users can sign in using their Google account via Firebase Authentication. For those who prefer not to sign in, there's an option for **Guest login**.
 4. **State Management**: All application states, like movie search results and user information, are managed using Redux, ensuring a smooth and consistent user experience.
 
 ## Tech Stack

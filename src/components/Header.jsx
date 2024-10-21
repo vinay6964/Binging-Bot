@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { toggleGptSearch } from "../utils/gptSlice";
 import { SUPPORTED_LANGUAGES } from "../utils/languageConstants";
 import { changeLanguage } from "../utils/configSlice";
+import { addGuest } from "../utils/GuestSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -20,20 +21,20 @@ const Header = () => {
     return store.userFromgoogle;
   });
   const gptSearchData = useSelector((store) => store.gpt.showGptSearch);
+  const guestData = useSelector((store) => store.guestLogIn.guest)
 
   const handlegptSearchClick = () => {
     dispatch(toggleGptSearch());
   };
 
   const handleLanguageChange = (e) => {
-    console.log("🚀 ~ handleLanguageChange ~ e.target.value:", e.target.value);
     dispatch(changeLanguage(e.target.value));
   };
 
   useEffect(() => {
-    if (signedInGoogleUser) navigate("/browse");
+    if (signedInGoogleUser || guestData) navigate("/browse");
     else navigate("/");
-  }, [signedInGoogleUser, navigate]);
+  }, [signedInGoogleUser, navigate, guestData]);
 
   const handleSingInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -55,6 +56,11 @@ const Header = () => {
       });
   };
 
+  const handleGuestLogIn = () => {
+    dispatch(addGuest())
+    navigate("/browse")
+  }
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -74,7 +80,7 @@ const Header = () => {
         alt="Netflix Logo"
       />
 
-      {signedInGoogleUser ? (
+      { (signedInGoogleUser || guestData) ? (
         <div className="flex items-center space-x-4">
           {gptSearchData && (
             <select
@@ -101,6 +107,7 @@ const Header = () => {
               {gptSearchData ? "Home Page" : "GPT Search"}
             </button>
           </div>
+          {!guestData && signedInGoogleUser && 
           <div
             className="flex items-center justify-end px-10 -py-20 cursor-pointer"
             onClick={() => setShowDropdown(!showDropdown)}
@@ -121,8 +128,9 @@ const Header = () => {
                   .toLowerCase()}
             </span>
           </div>
+          }
 
-          {showDropdown && (
+          {!guestData && showDropdown && (
             <div className="absolute right-30 top-20 mt-2 w-40 bg-gray-900 text-white shadow-lg rounded-lg">
               <div className="py-2 px-4 hover:bg-red-700 cursor-pointer">
                 Children
@@ -149,12 +157,20 @@ const Header = () => {
           )}
         </div>
       ) : (
+        <div>
+          <button
+          className="py-3 px-6 bg-red-600 mx-10 hover:bg-red-700 rounded-lg text-white font-semibold"
+          onClick={handleGuestLogIn}
+        >
+          Guest
+        </button>
         <button
           className="py-3 px-6 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold"
           onClick={handleSingInWithGoogle}
         >
           Sign Up
         </button>
+      </div>
       )}
     </div>
   );
